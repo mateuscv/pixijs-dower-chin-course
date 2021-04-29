@@ -2,6 +2,7 @@ let app;
 let player;
 let keys = {};
 let keysDiv;
+let playerSheet = {};
 
 window.onload = function () {
   app = new PIXI.Application({
@@ -12,15 +13,8 @@ window.onload = function () {
 
   document.body.appendChild(app.view);
 
-  // player object
-  player = new PIXI.Sprite.from("images/player.png");
-  player.anchor.set(0.5);
-  player.x = app.view.width / 2;
-  player.y = app.view.height / 2;
-
-  app.stage.addChild(player);
-
-  app.ticker.add(gameLoop);
+  app.loader.add("viking", "images/viking.png");
+  app.loader.load(doneLoading);
 
   keysDiv = document.querySelector("#keys");
 
@@ -32,6 +26,63 @@ window.onload = function () {
         app.stage.on("pointermove", movePlayer);*/
 };
 
+function doneLoading(e) {
+  createPlayerSheet();
+  createPlayer();
+  app.ticker.add(gameLoop);
+}
+
+function createPlayerSheet() {
+  let ssheet = new PIXI.BaseTexture.from(app.loader.resources["viking"].url);
+  let w = 26;
+  let h = 36;
+
+  playerSheet["standSouth"] = [
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(1 * w, 0, w, h)),
+  ];
+
+  playerSheet["standWest"] = [
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(4 * w, 0, w, h)),
+  ];
+  playerSheet["standEast"] = [
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(7 * w, 0, w, h)),
+  ];
+  playerSheet["standNorth"] = [
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(10 * w, 0, w, h)),
+  ];
+
+  playerSheet["walkSouth"] = [
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(0 * w, 0, w, h)),
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(1 * w, 0, w, h)),
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(2 * w, 0, w, h)),
+  ];
+  playerSheet["walkWest"] = [
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(3 * w, 0, w, h)),
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(4 * w, 0, w, h)),
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(5 * w, 0, w, h)),
+  ];
+  playerSheet["walkEast"] = [
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(6 * w, 0, w, h)),
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(7 * w, 0, w, h)),
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(8 * w, 0, w, h)),
+  ];
+  playerSheet["walkNorth"] = [
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(9 * w, 0, w, h)),
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(10 * w, 0, w, h)),
+    new PIXI.Texture(ssheet, new PIXI.Rectangle(11 * w, 0, w, h)),
+  ];
+}
+
+function createPlayer() {
+  player = new PIXI.AnimatedSprite(playerSheet.walkSouth);
+  player.anchor.set(0.5);
+  player.animationSpeed = 0.1;
+  player.loop = true;
+  player.x = app.view.width / 2;
+  player.y = app.view.height / 2;
+  app.stage.addChild(player);
+  player.play();
+}
 // kb interactivity
 function keysDown(e) {
   keys[e.keyCode] = true;
@@ -61,7 +112,6 @@ function gameLoop() {
     player.x += 5;
   }
 }
-
 //mouse interactions:
 /*function movePlayer(event) {
         let pos = event.data.global; // get mouse position
