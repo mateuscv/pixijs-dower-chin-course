@@ -9,15 +9,21 @@
     <script>
       let app;
       let player;
+      let bullets = [];
+      let bulletSpeed = 5;
 
       window.onload = function () {
         app = new PIXI.Application({
           width: 800,
           height: 600,
-          backgroundColor: 0xaaaaaa,
+          backgroundColor: 0x66b3bd,
         });
 
-        document.body.appendChild(app.view);
+        document.querySelector("#gameDiv").appendChild(app.view);
+        app.stage.interactive = true;
+        document
+          .querySelector("#gameDiv")
+          .addEventListener("pointerdown", fireBullet);
 
         player = PIXI.Sprite.from("images/player.png");
         player.anchor.set(0.5);
@@ -25,10 +31,53 @@
         player.y = app.view.height / 2;
 
         app.stage.addChild(player);
+
+        app.ticker.add(gameLoop);
       };
+
+      function fireBullet(e) {
+        console.log("FIRE!");
+        bullet = createBullet();
+        bullets.push(bullet);
+      }
+
+      function createBullet() {
+        let bullet = new PIXI.Sprite.from("images/bullet.png");
+        bullet.anchor.set(0.5);
+        bullet.x = player.x;
+        bullet.y = player.y;
+        bullet.speed = bulletSpeed;
+        app.stage.addChild(bullet);
+
+        return bullet;
+      }
+
+      function updateBullets(delta) {
+        for (let index = 0; index < bullets.length; index++) {
+          bullets[index].position.y -= bullets[index].speed;
+          if (
+            bullets[index].position.x > app.view.width ||
+            bullets[index].position.x < 0 ||
+            bullets[index].position.y > app.view.height ||
+            bullets[index].position.y < 0
+          ) {
+            bullets[index].dead = true;
+          }
+        }
+        for (let index = 0; index < bullets.length; index++) {
+          if (bullets[index].dead) {
+            app.stage.removeChild(bullets[index]);
+            bullets.splice(index, 1);
+          }
+        }
+      }
+
+      function gameLoop(delta) {
+        updateBullets(delta);
+      }
     </script>
   </head>
   <body>
-    <div></div>
+    <div id="gameDiv"></div>
   </body>
 </html>
