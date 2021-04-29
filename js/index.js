@@ -3,6 +3,7 @@ let player;
 let keys = {};
 let keysDiv;
 let playerSheet = {};
+let speed = 2;
 
 window.onload = function () {
   app = new PIXI.Application({
@@ -76,8 +77,8 @@ function createPlayerSheet() {
 function createPlayer() {
   player = new PIXI.AnimatedSprite(playerSheet.walkSouth);
   player.anchor.set(0.5);
-  player.animationSpeed = 0.1;
-  player.loop = true;
+  player.animationSpeed = 0.18;
+  player.loop = false;
   player.x = app.view.width / 2;
   player.y = app.view.height / 2;
   app.stage.addChild(player);
@@ -97,19 +98,35 @@ function gameLoop() {
 
   //w
   if (keys["87"]) {
-    player.y -= 5;
+    if (!player.playing) {
+      player.textures = playerSheet.walkNorth;
+      player.play();
+    }
+    player.y -= speed;
   }
   //a
   if (keys["65"]) {
-    player.x -= 5;
+    if (!player.playing) {
+      player.textures = playerSheet.walkWest;
+      player.play();
+    }
+    player.x -= speed;
   }
   //s
   if (keys["83"]) {
-    player.y += 5;
+    if (!player.playing) {
+      player.textures = playerSheet.walkSouth;
+      player.play();
+    }
+    player.y += speed;
   }
   //d
   if (keys["68"]) {
-    player.x += 5;
+    if (!player.playing) {
+      player.textures = playerSheet.walkEast;
+      player.play();
+    }
+    player.x += speed;
   }
 }
 //mouse interactions:
