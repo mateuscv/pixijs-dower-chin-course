@@ -38,7 +38,7 @@
         app = new PIXI.Application({
           width: 800,
           height: 600,
-          backgroundColor: 0xaaaaaa,
+          backgroundColor: 0xbbbbbb,
         });
 
         document.body.appendChild(app.view);
@@ -54,8 +54,16 @@
         rect.on("pointerover", doPointerOver);
         rect.on("pointerout", doPointerOut);
         rect.on("pointerupoutside", doPointerUpOutside);
+        let rectShadow = new PIXI.Graphics();
+        rectShadow.beginFill(0x555555);
+        rectShadow.drawRect(app.view.width / 2 - 92, app.view.height / 2 - 92 , 200, 200);
+        rectShadow.endFill();
+        rectShadow.alpha = 0.4;
+        rectShadow.blendMode = PIXI.BLEND_MODES.EXCLUSION;
+        app.stage.addChild(rectShadow);
         app.stage.addChild(rect);
 
+        console.log(app.stage);
         app.ticker.add(gameLoop);
       };
 
