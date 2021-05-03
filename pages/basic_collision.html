@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="js/pixi.min.js"></script>
+    <style>
+      ul > li {
+        display: inline-block;
+      }
+    </style>
+    <script src="../js/pixi.min.js"></script>
     <script>
       let app;
       let player;
@@ -21,14 +26,14 @@
         document.body.appendChild(app.view);
 
         // player
-        player = new PIXI.Sprite.from("images/player.png");
+        player = new PIXI.Sprite.from("../images/player.png");
         player.anchor.set(0.5);
         player.x = 16;
         player.y = app.view.height / 2;
         app.stage.addChild(player);
 
         // enemy
-        enemy = new PIXI.Sprite.from("images/player.png");
+        enemy = new PIXI.Sprite.from("../images/player.png");
         enemy.anchor.set(0.5);
         enemy.x = app.view.width - 16;
         enemy.y = app.view.height / 2;
@@ -59,6 +64,18 @@
     </script>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="./bullets.html">Bullets</a> |</li>
+        <li><a href="./cssFont.html"> CSS Font</a> |</li>
+        <li><a href="./containers.html"> Containers</a> |</li>
+        <li><a href="./preloader.html"> Preloader</a> |</li>
+        <li>
+          <a href="./spritesheet_anims.html"> Spritesheet Animations</a> |
+        </li>
+        <li><a href="./basic_collision.html"> Basic Collision</a> |</li>
+      </ul>
+    </nav>
     <div></div>
   </body>
 </html>

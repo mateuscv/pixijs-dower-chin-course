@@ -8,14 +8,17 @@
     <style>
       @font-face {
         font-family: "Earth Kid";
-        src: url("font/Earth\ Kid.ttf");
+        src: url("../font/Earth\ Kid.ttf");
       }
       #fe {
         font-family: "Earth Kid";
         font-size: 0px;
       }
+      ul > li {
+        display: inline-block;
+      }
     </style>
-    <script src="js/pixi.min.js"></script>
+    <script src="../js/pixi.min.js"></script>
     <script>
       let app;
       let text1;
@@ -43,6 +46,18 @@
     </script>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="./bullets.html">Bullets</a> |</li>
+        <li><a href="./cssFont.html"> CSS Font</a> |</li>
+        <li><a href="./containers.html"> Containers</a> |</li>
+        <li><a href="./preloader.html"> Preloader</a> |</li>
+        <li>
+          <a href="./spritesheet_anims.html"> Spritesheet Animations</a> |
+        </li>
+        <li><a href="./basic_collision.html"> Basic Collision</a> |</li>
+      </ul>
+    </nav>
     <div id="fe">font enable</div>
   </body>
 </html>

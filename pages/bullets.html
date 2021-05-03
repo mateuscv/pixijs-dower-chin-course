@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="js/pixi.min.js"></script>
+    <style>
+      ul > li {
+        display: inline-block;
+      }
+    </style>
+    <script src="../js/pixi.min.js"></script>
     <script>
       let app;
       let player;
@@ -25,7 +30,7 @@
           .querySelector("#gameDiv")
           .addEventListener("pointerdown", fireBullet);
 
-        player = PIXI.Sprite.from("images/player.png");
+        player = PIXI.Sprite.from("../images/player.png");
         player.anchor.set(0.5);
         player.x = app.view.width / 2;
         player.y = app.view.height / 2;
@@ -42,7 +47,7 @@
       }
 
       function createBullet() {
-        let bullet = new PIXI.Sprite.from("images/bullet.png");
+        let bullet = new PIXI.Sprite.from("../images/bullet.png");
         bullet.anchor.set(0.5);
         bullet.x = player.x;
         bullet.y = player.y;
@@ -78,6 +83,18 @@
     </script>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="./bullets.html">Bullets</a> |</li>
+        <li><a href="./cssFont.html"> CSS Font</a> |</li>
+        <li><a href="./containers.html"> Containers</a> |</li>
+        <li><a href="./preloader.html"> Preloader</a> |</li>
+        <li>
+          <a href="./spritesheet_anims.html"> Spritesheet Animations</a> |
+        </li>
+        <li><a href="./basic_collision.html"> Basic Collision</a> |</li>
+      </ul>
+    </nav>
     <div id="gameDiv"></div>
   </body>
 </html>

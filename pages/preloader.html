@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="js/pixi.min.js"></script>
+    <style>
+      ul > li {
+        display: inline-block;
+      }
+    </style>
+    <script src="../js/pixi.min.js"></script>
     <script>
       let app;
       let player;
@@ -20,7 +25,7 @@
         document.body.appendChild(app.view);
 
         // preload assets
-        app.loader.baseUrl = "images";
+        app.loader.baseUrl = "../images";
         app.loader
           .add("sprite01", "bloat01.png")
           .add("sprite02", "bloat02.png")
@@ -58,6 +63,18 @@
     </script>
   </head>
   <body>
+    <nav>
+      <ul>
+        <li><a href="./bullets.html">Bullets</a> |</li>
+        <li><a href="./cssFont.html"> CSS Font</a> |</li>
+        <li><a href="./containers.html"> Containers</a> |</li>
+        <li><a href="./preloader.html"> Preloader</a> |</li>
+        <li>
+          <a href="./spritesheet_anims.html"> Spritesheet Animations</a> |
+        </li>
+        <li><a href="./basic_collision.html"> Basic Collision</a> |</li>
+      </ul>
+    </nav>
     <div></div>
   </body>
 </html>
