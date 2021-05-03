@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      ul > li {
+        display: inline-block;
+      }
+    </style>
+    <script src="../js/pixi.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="../index.html"> 🏠 <Bullets></a> |</li>
+        <li><a href="./bullets.html">Bullets</a> |</li>
+        <li><a href="./cssFont.html"> CSS Font</a> |</li>
+        <li><a href="./containers.html"> Containers</a> |</li>
+        <li><a href="./preloader.html"> Preloader</a> |</li>
+        <li>
+          <a href="./spritesheet_anims.html"> Spritesheet Animations</a> |
+        </li>
+        <li><a href="./basic_collision.html"> Basic Collision</a> |</li>
+      </ul>
+    </nav>
+    <script>
+      let app;
+      let pointerIsDown = false;
+      let pointerIsOver = false;
+      const NORMAL = 0xffffff;
+      const OVER = 0x00ff00;
+      const DOWN = 0xff0000;
+
+      window.onload = function () {
+        app = new PIXI.Application({
+          width: 800,
+          height: 600,
+          backgroundColor: 0xaaaaaa,
+        });
+
+        document.body.appendChild(app.view);
+
+        let rect = new PIXI.Graphics();
+        rect.beginFill(NORMAL);
+        rect.drawRect(app.view.width / 2 - 100, app.view.height / 2 - 100, 200, 200);
+        rect.endFill();
+        rect.interactive = true;
+        rect.buttonMode = true;
+        rect.on("pointerup", doPointerUp);
+        rect.on("pointerdown", doPointerDown);
+        rect.on("pointerover", doPointerOver);
+        rect.on("pointerout", doPointerOut);
+        rect.on("pointerupoutside", doPointerUpOutside);
+        app.stage.addChild(rect);
+
+        app.ticker.add(gameLoop);
+      };
+
+      function gameLoop(delta) {}
+
+      function doPointerUp() {
+        pointerIsDown = false;
+        if (!pointerIsOver) {
+          this.tint = NORMAL;
+        } else {
+          this.tint = OVER;
+        }
+      }
+
+      function doPointerDown() {
+        this.tint = DOWN;
+        pointerIsDown = true;
+      }
+
+      function doPointerOver() {
+        if(!pointerIsDown) {
+          this.tint = OVER;
+          pointerIsOver = true;
+
+        }
+      }
+
+      function doPointerOut() {
+        pointerIsOver = false;
+        if (!pointerIsDown){
+          this.tint = NORMAL;
+        }
+      }
+
+      function doPointerUpOutside(){
+        this.tint = NORMAL;
+        pointerIsOver = false;
+        pointerIsDown = false;
+      }
+
+    </script>
+  </body>
+</html>
