@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      ul{
+      ul {
         padding-left: 2px;
       }
       ul > li {
@@ -17,20 +17,20 @@
   </head>
   <body>
     <nav>
-        <ul>
-          <li><a href="../index.html"> 🏠 <Bullets></a> |</li>
-          <li><a href="./bullets.html">Bullets</a> |</li>
-          <li><a href="./css-font.html"> CSS Font</a> |</li>
-          <li><a href="./containers.html"> Containers</a> |</li>
-          <li><a href="./preloader.html"> Preloader</a> |</li>
-          <li>
-            <a href="./spritesheet-anims.html"> Spritesheet Animations</a> |
-          </li>
-          <li><a href="./basic-collision.html"> Basic Collision</a> |</li>
-          <li><a href="./pointer-events.html"> Pointer Events I </a> |</li>
-<li><a href="./pointer-events-2.html"> Pointer Events II </a> |</li>
-        </ul>
-      </nav>
+      <ul>
+        <li><a href="../index.html"> 🏠 </a> |</li>
+        <li><a href="./bullets.html">Bullets</a> |</li>
+        <li><a href="./css-font.html"> CSS Font</a> |</li>
+        <li><a href="./containers.html"> Containers</a> |</li>
+        <li><a href="./preloader.html"> Preloader</a> |</li>
+        <li>
+          <a href="./spritesheet-anims.html"> Spritesheet Animations</a> |
+        </li>
+        <li><a href="./basic-collision.html"> Basic Collision</a> |</li>
+        <li><a href="./pointer-events.html"> Pointer Events I </a> |</li>
+        <li><a href="./pointer-events-2.html"> Pointer Events II </a> |</li>
+      </ul>
+    </nav>
     <script>
       let app;
       let pointerIsDown = false;
@@ -50,7 +50,12 @@
 
         let rect = new PIXI.Graphics();
         rect.beginFill(NORMAL);
-        rect.drawRect(app.view.width / 2 - 100, app.view.height / 2 - 100, 200, 200);
+        rect.drawRect(
+          app.view.width / 2 - 100,
+          app.view.height / 2 - 100,
+          200,
+          200
+        );
         rect.endFill();
         rect.interactive = true;
         rect.buttonMode = true;
@@ -61,7 +66,12 @@
         rect.on("pointerupoutside", doPointerUpOutside);
         let rectShadow = new PIXI.Graphics();
         rectShadow.beginFill(0x555555);
-        rectShadow.drawRect(app.view.width / 2 - 92, app.view.height / 2 - 92 , 200, 200);
+        rectShadow.drawRect(
+          app.view.width / 2 - 92,
+          app.view.height / 2 - 92,
+          200,
+          200
+        );
         rectShadow.endFill();
         rectShadow.alpha = 0.4;
         rectShadow.blendMode = PIXI.BLEND_MODES.EXCLUSION;
@@ -89,26 +99,24 @@
       }
 
       function doPointerOver() {
-        if(!pointerIsDown) {
+        if (!pointerIsDown) {
           this.tint = OVER;
           pointerIsOver = true;
-
         }
       }
 
       function doPointerOut() {
         pointerIsOver = false;
-        if (!pointerIsDown){
+        if (!pointerIsDown) {
           this.tint = NORMAL;
         }
       }
 
-      function doPointerUpOutside(){
+      function doPointerUpOutside() {
         this.tint = NORMAL;
         pointerIsOver = false;
         pointerIsDown = false;
       }
-
     </script>
   </body>
 </html>

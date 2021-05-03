@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      ul{
+      ul {
         padding-left: 2px;
       }
       ul > li {
@@ -16,29 +16,28 @@
     <script src="../js/pixi.min.js"></script>
   </head>
   <body>
-
-      <nav>
-        <ul>
-          <li><a href="../index.html"> 🏠 <Bullets></a> |</li>
-          <li><a href="./bullets.html">Bullets</a> |</li>
-          <li><a href="./css-font.html"> CSS Font</a> |</li>
-          <li><a href="./containers.html"> Containers</a> |</li>
-          <li><a href="./preloader.html"> Preloader</a> |</li>
-          <li>
-            <a href="./spritesheet-anims.html"> Spritesheet Animations</a> |
-          </li>
-          <li><a href="./basic-collision.html"> Basic Collision</a> |</li>
-          <li><a href="./pointer-events.html"> Pointer Events I </a> |</li>
-<li><a href="./pointer-events-2.html"> Pointer Events II </a> |</li>
-        </ul>
-      </nav>
+    <nav>
+      <ul>
+        <li><a href="../index.html"> 🏠 </a> |</li>
+        <li><a href="./bullets.html">Bullets</a> |</li>
+        <li><a href="./css-font.html"> CSS Font</a> |</li>
+        <li><a href="./containers.html"> Containers</a> |</li>
+        <li><a href="./preloader.html"> Preloader</a> |</li>
+        <li>
+          <a href="./spritesheet-anims.html"> Spritesheet Animations</a> |
+        </li>
+        <li><a href="./basic-collision.html"> Basic Collision</a> |</li>
+        <li><a href="./pointer-events.html"> Pointer Events I </a> |</li>
+        <li><a href="./pointer-events-2.html"> Pointer Events II </a> |</li>
+      </ul>
+    </nav>
 
     <script>
       let app;
       let r1;
       let r2;
       let r3;
-      
+
       let pointerIsDown = false;
       let pointerIsOver = false;
       const NORMAL = 0xffffff;
@@ -57,21 +56,20 @@
         document.body.appendChild(app.view);
 
         // (x, y, w, h, name, speed)
-        r1 = createRect(100, 450, RECT_W, RECT_H, "rect01", 10)
-        r2 = createRect(300, 450, RECT_W, RECT_H, "rect02", 50)
-        r3 = createRect(500, 450, RECT_W, RECT_H, "rect03", 100)
+        r1 = createRect(100, 450, RECT_W, RECT_H, "rect01", 10);
+        r2 = createRect(300, 450, RECT_W, RECT_H, "rect02", 50);
+        r3 = createRect(500, 450, RECT_W, RECT_H, "rect03", 100);
 
-        app.stage.addChild(r1)
-        app.stage.addChild(r2)
-        app.stage.addChild(r3)
+        app.stage.addChild(r1);
+        app.stage.addChild(r2);
+        app.stage.addChild(r3);
 
         app.ticker.add(gameLoop);
       };
 
       function gameLoop(delta) {}
 
-
-      function createRect(x, y, w, h, name, speed){
+      function createRect(x, y, w, h, name, speed) {
         let rect = new PIXI.Graphics();
         rect.beginFill(NORMAL);
         rect.drawRect(x, y, w, h);
@@ -84,7 +82,7 @@
         rect.on("pointerover", doPointerOver);
         rect.on("pointerout", doPointerOut);
         rect.on("pointerupoutside", doPointerUpOutside);
-      
+
         rect.name = name;
         rect.speed = speed;
 
@@ -108,26 +106,24 @@
       }
 
       function doPointerOver() {
-        if(!pointerIsDown) {
+        if (!pointerIsDown) {
           this.tint = OVER;
           pointerIsOver = true;
-
         }
       }
 
       function doPointerOut() {
         pointerIsOver = false;
-        if (!pointerIsDown){
+        if (!pointerIsDown) {
           this.tint = NORMAL;
         }
       }
 
-      function doPointerUpOutside(){
+      function doPointerUpOutside() {
         this.tint = NORMAL;
         pointerIsOver = false;
         pointerIsDown = false;
       }
-
     </script>
   </body>
 </html>
