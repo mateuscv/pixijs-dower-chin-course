@@ -4,43 +4,123 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <style>
-      p,
-      h1,
-      a,
-      footer {
-        font-family: Helvetica;
+      ul{
+        padding-left: 2px;
+      }
+      ul > li {
+        display: inline-block;
       }
     </style>
-    <title>Dower Chin's PixiJS Course</title>
+    <script src="../js/pixi.min.js"></script>
   </head>
   <body>
-    <div>
-      <h1 style="margin-bottom: 0">Dower Chin's PixiJS Course</h1>
-      <a
-        style="font-size: smaller"
-        href="https://www.youtube.com/watch?v=_HjQTzpbRK4&list=PLGsA9l-S7trVmUJ7HJsNSKIj0qoAO_qO8"
-        >Click here to view the course playlist.</a
-      >
-      <p>
-        Please choose the mini-app you'd like to access.<br />
-        Make sure you're running a web server. <br />
-      </p>
-    </div>
     <nav>
       <ul>
-        <li><a href="pages/bullets.html">Bullets</a></li>
-        <li><a href="pages/cssFont.html"> CSS Font</a></li>
-        <li><a href="pages/containers.html"> Containers</a></li>
-        <li><a href="pages/preloader.html"> Preloader</a></li>
+        <li><a href="../index.html"> 🏠 <Bullets></a> |</li>
+        <li><a href="./bullets.html">Bullets</a> |</li>
+        <li><a href="./cssFont.html"> CSS Font</a> |</li>
+        <li><a href="./containers.html"> Containers</a> |</li>
+        <li><a href="./preloader.html"> Preloader</a> |</li>
         <li>
-          <a href="pages/spritesheet_anims.html"> Spritesheet Animations</a>
+          <a href="./spritesheet_anims.html"> Spritesheet Animations</a> |
         </li>
-        <li><a href="pages/basic_collision.html"> Basic Collision</a></li>
+            <nav>
+        <ul>
+          <li><a href="../index.html"> 🏠 <Bullets></a> |</li>
+          <li><a href="./bullets.html">Bullets</a> |</li>
+          <li><a href="./cssFont.html"> CSS Font</a> |</li>
+          <li><a href="./containers.html"> Containers</a> |</li>
+          <li><a href="./preloader.html"> Preloader</a> |</li>
+          <li>
+            <a href="./spritesheet_anims.html"> Spritesheet Animations</a> |
+          </li>
+          <li><a href="./basic_collision.html"> Basic Collision</a> |</li>
+          <li><a href="./pointerEvents.html"> Pointer Events I </a> |</li>
+        </ul>
+      </nav>
       </ul>
     </nav>
-    <div id="keys"></div>
-    <hr />
-    <footer>2021 - Mateus Cappellari Vieira</footer>
+
+    <script>
+      let app;
+      let pointerIsDown = false;
+      let pointerIsOver = false;
+      const NORMAL = 0xffffff;
+      const OVER = 0x00ff00;
+      const DOWN = 0xff0000;
+
+      window.onload = function () {
+        app = new PIXI.Application({
+          width: 800,
+          height: 600,
+          backgroundColor: 0xbbbbbb,
+        });
+
+        document.body.appendChild(app.view);
+
+        let rect = new PIXI.Graphics();
+        rect.beginFill(NORMAL);
+        rect.drawRect(app.view.width / 2 - 100, app.view.height / 2 - 100, 200, 200);
+        rect.endFill();
+        rect.interactive = true;
+        rect.buttonMode = true;
+        rect.on("pointerup", doPointerUp);
+        rect.on("pointerdown", doPointerDown);
+        rect.on("pointerover", doPointerOver);
+        rect.on("pointerout", doPointerOut);
+        rect.on("pointerupoutside", doPointerUpOutside);
+        let rectShadow = new PIXI.Graphics();
+        rectShadow.beginFill(0x555555);
+        rectShadow.drawRect(app.view.width / 2 - 92, app.view.height / 2 - 92 , 200, 200);
+        rectShadow.endFill();
+        rectShadow.alpha = 0.4;
+        rectShadow.blendMode = PIXI.BLEND_MODES.EXCLUSION;
+        app.stage.addChild(rectShadow);
+        app.stage.addChild(rect);
+
+        console.log(app.stage);
+        app.ticker.add(gameLoop);
+      };
+
+      function gameLoop(delta) {}
+
+      function doPointerUp() {
+        pointerIsDown = false;
+        if (!pointerIsOver) {
+          this.tint = NORMAL;
+        } else {
+          this.tint = OVER;
+        }
+      }
+
+      function doPointerDown() {
+        this.tint = DOWN;
+        pointerIsDown = true;
+      }
+
+      function doPointerOver() {
+        if(!pointerIsDown) {
+          this.tint = OVER;
+          pointerIsOver = true;
+
+        }
+      }
+
+      function doPointerOut() {
+        pointerIsOver = false;
+        if (!pointerIsDown){
+          this.tint = NORMAL;
+        }
+      }
+
+      function doPointerUpOutside(){
+        this.tint = NORMAL;
+        pointerIsOver = false;
+        pointerIsDown = false;
+      }
+
+    </script>
   </body>
 </html>
