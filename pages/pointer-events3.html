@@ -77,11 +77,33 @@
         app.stage.addChild(girl);
       }
 
-      function doPointerUp() {}
-      function doPointerUpOutside() {}
-      function doPointerDown() {}
-      function doPointerOver() {}
-      function doPointerUpOut() {}
+      function doPointerUp() {
+        if (pointerIsOver) {
+          girl.texture = app.loader.resources["over"].texture;
+        } else {
+          girl.texture = app.loader.resources["idle"].texture;
+        }
+        pointerIsDown = false;
+      }
+      function doPointerUpOutside() {
+        girl.texture = app.loader.resources["upoutside"].texture;
+        pointerIsDown = false;
+        pointerIsOver = false;
+      }
+      function doPointerDown() {
+        pointerIsDown = true;
+        girl.texture = app.loader.resources["down"].texture;
+      }
+      function doPointerOver() {
+        pointerIsOver = true;
+        girl.texture = app.loader.resources["over"].texture;
+      }
+      function doPointerOut() {
+        if (!pointerIsDown) {
+          pointerIsOver = false;
+          girl.texture = app.loader.resources["idle"].texture;
+        }
+      }
     </script>
   </body>
 </html>
